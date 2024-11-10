@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="lnb" id="lnb" class="tab-list">
+    <a href="/member/online/matching-day/view"  th:classappend="${requestURI.startsWith('/member/online/matching-day/view')} ? 'on'">통합매칭데이</a>
+    <a href="/member/online/matching-day/notice/list" th:classappend="${requestURI.startsWith('/member/online/matching-day/notice/list')} ? 'on'">공지사항</a>
+    <a href="/member/online/matching-day/employ/list" th:classappend="${requestURI.startsWith('/member/online/matching-day/employ/list')} ? 'on'">채용공고</a>
+    <a href="/member/online/matching-day/business/list" th:classappend="${requestURI.startsWith('/member/online/matching-day/business/list')} ? 'on'">참여기업</a>
+</div>

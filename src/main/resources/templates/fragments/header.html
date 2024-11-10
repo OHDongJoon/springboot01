@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="header" id="header">
+    <div class="" style="height:60px">
+        <div class="content-header">
+            <div class="logo-area">
+                <a href="/" class="">
+                    <span class="is-blind"></span>
+                </a>
+            </div>
+            <div class="menu-area">
+                <div class="top-1">
+                    <th:block sec:authorize="isAnonymous()">
+                        <a href="/login" class="login">로그인</a>
+                        <em class="hide-m">|</em>
+                        <a href="/member/join/step1" class="hide-m">회원가입</a>
+                    </th:block>
+                    <th:block sec:authorize="!isAnonymous()">
+                        <a href="/member/mypage/enterprise/info" th:text="${#authentication.principal.businessName + ' 회원 |'}" sec:authorize="hasRole('ENTERPRISE')">홍길동</a>
+
+                        <a href="/member/mypage/organ/info" th:text="${#authentication.principal.businessName + ' 회원 |'}" sec:authorize="hasRole('ORGAN')">홍길동</a>
+
+                        <a href="/member/mypage/user/info" th:text="${#authentication.principal.realName + ' 회원 |'}" sec:authorize="hasRole('USER')">홍길동</a>
+
+                        <a href="/logout" class="login">로그아웃</a>
+                    </th:block>
+
+                    <button type="button" class="all-menu">전체메뉴</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</html>

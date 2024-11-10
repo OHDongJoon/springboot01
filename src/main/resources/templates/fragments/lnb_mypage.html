@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout}">
+
+<ul th:fragment="lnb" id="lnb" class="menu-list">
+    <th:block sec:authorize="hasRole('ENTERPRISE')">
+        <!--기업-->
+        <li th:classappend="${requestURI.startsWith('/member/mypage/enterprise/info')} ? 'on'">
+            <a href="/member/mypage/enterprise/info">공고 지원자 관리</a>
+        </li>
+        <!--기업-->
+    </th:block>
+
+    <!--기관-->
+    <th:block sec:authorize="hasRole('ORGAN')">
+        <li th:classappend="${requestURI.startsWith('/member/mypage/organ/info')} ? 'on'">
+            <a href="/member/mypage/organ/info">인재 추천</a>
+        </li>
+        <li th:classappend="${requestURI.startsWith('/member/mypage/curriculum-vitae/organ')} ? 'on'">
+            <a href="/member/mypage/curriculum-vitae/organ/management">인재 이력서 관리</a>
+        </li>
+    </th:block>
+    <!--기관-->
+
+    <th:block sec:authorize="hasRole('USER')">
+        <!--개인-->
+        <li th:classappend="${requestURI.startsWith('/member/mypage/user/info')} ? 'on'">
+            <a href="/member/mypage/user/info">지원 현황</a>
+        </li>
+        <li th:classappend="${requestURI.startsWith('/admin/member')} ? 'on'">
+            <a href="./p_resume_list.html">나의 이력서 관리</a>
+        </li>
+    </th:block>
+    <!--개인-->
+    <li th:classappend="${requestURI.startsWith('/member/mypage/check/information')} ? 'on'">
+        <a href="/member/mypage/check/information">정보확인</a>
+    </li>
+</ul>

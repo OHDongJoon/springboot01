@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:fragment="aside-bg"  class="aside-bg"></div>
+<aside th:fragment="aside-menu" id="aside-menu">
+    <div class="aside-header">
+        <button type="button" class="aside-close">닫기</button>
+        <div class="member-info">
+            <strong>기업회원<span class="name">홍길동</span></strong>님 반갑습니다!
+        </div>
+        <div class="btn-wrap">
+            <button type="button" class="btn">로그아웃</button>
+            <button type="button" class="btn">마이페이지</button>
+        </div>
+    </div>
+    <div class="aside-body">
+        <div class="aside-menu">
+            <div class="dep1 has-child">
+                <a href="#" class="dep1a">일자리지원</a>
+                <div class="dep2">
+                    <div class="dep2-space">
+                        <a href="../apply/apply_list.html">정책정보</a>
+                        <a href="../apply/agency_list.html">인재양성기관</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dep1 has-child">
+                <a href="#" class="dep1a">사업참여</a>
+                <div class="dep2">
+                    <div class="dep2-space">
+                        <a href="#">재단사업</a>
+                        <a href="#">타 기관사업</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dep1 has-child">
+                <a href="#" class="dep1a">교육신청</a>
+                <div class="dep2">
+                    <div class="dep2-space">
+                        <a href="#">구직자 교육</a>
+                        <a href="#">재직자 교육</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dep1 has-child">
+                <a href="#" class="dep1a">온라인채용관</a>
+                <div class="dep2">
+                    <div class="dep2-space">
+
+                    </div>
+                </div>
+            </div>
+            <div class="dep1 has-child">
+                <a href="#" class="dep1a">참여소통</a>
+                <div class="dep2">
+                    <div class="dep2-space">
+                        <a href="../communication/notice_list.html">공지사항</a>
+                        <a href="../communication/event_list.html">이벤트</a>
+                        <a href="../communication/faq_list.html">FAQ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+</html>

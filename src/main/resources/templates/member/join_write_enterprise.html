@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <title>-</title>
+</head>
+
+<body>
+<main layout:fragment="contents">
+    <div class="sub-content">
+        <div class="member-wrap">
+            <div class="w-set">
+                <div class="write-wrap">
+                    <div class="tit-area">
+                        <h2 class="tit">가입 정보와<br>기업 정보를 입력해주세요.</h2>
+                    </div>
+                    <form id="frmSave" th:object="${saveDto}">
+                        <input type="hidden" th:field="*{role}">
+                        <div class="cont">
+                            <div class="subTit-area">
+                                <div class="sub-tit">
+                                    <span class="tit">가입 정보</span>
+                                    <span class="required">필수 입력</span>
+                                </div>
+                            </div>
+                            <div class="input-wrap">
+                                <div class="input-item">
+                                    <div class="inputTit-area">
+                                        <p class="input-tit">아이디</p>
+                                    </div>
+                                    <div class="add-btn">
+                                        <input type="text" th:field="*{loginId}" id="loginId" placeholder="아이디를 사업자번호로 입력해주세요">
+                                        <label for="loginId" class="is-blind">아이디</label>
+                                        <button type="button" class="btn on" id="btnLoginIdVerifyDuplicate">중복확인</button>
+                                    </div>
+                                </div>
+                                <div class="input-item">
+                                    <div>
+                                        <div class="inputTit-area">
+                                            <p class="input-tit required">비밀번호</p>
+                                        </div>
+                                        <input type="password" th:field="*{password}" id="password" placeholder="비밀번호는 8자리 이상 특수문자, 영문, 숫자 조합 입력">
+                                        <label for="password" class="is-blind">비밀번호</label>
+                                    </div>
+
+                                    <div>
+                                        <input type="password" th:field="*{passwordConfirm}" id="passwordConfirm" placeholder="비밀번호를 다시 입력해 주세요">
+                                        <label for="passwordConfirm" class="is-blind">비밀번호 확인</label>
+                                    </div>
+                                    <p class="error-txt" id="errorText"></p>
+                                </div>
+                                <div class="input-item">
+                                    <div class="select-box">
+                                        <select name="enterpriseIndustryCategoryId_1" id="enterpriseIndustryCategoryId_1">
+                                            <th:block th:each="category1 : ${depth01}">
+                                                <option th:value="${category1.id}" th:text="${category1.categoryTitle}">1차 선택
+                                                </option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                    <div class="select-box">
+                                        <select name="enterpriseIndustryCategoryId_2" id="enterpriseIndustryCategoryId_2">
+                                            <option value=""> 2차선택</option>
+                                            <th:block th:each="category2 : ${depth02}">
+                                                <option th:value="${category2.id}" th:text="${category2.categoryTitle}">1차 선택
+                                                </option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                    <div class="select-box">
+                                        <select name="enterpriseIndustryCategoryId_3" id="enterpriseIndustryCategoryId_3">
+                                            <option value=""> 3차선택</option>
+                                            <th:block th:each="category3 : ${depth03}">
+                                                <option th:value="${category3.id}" th:text="${category3.categoryTitle}">1차 선택
+                                                </option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-wrap">
+                            <button type="submit" id="btnSave" class="btn">가입완료</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script layout:fragment="script" th:inline="javascript">
+
+    document.getElementById('frmSave').addEventListener('submit', memberEnterPriceSave);
+
+    function memberEnterPriceSave(e) {
+
+        e.preventDefault();
+
+        let btnSave = document.getElementById('btnSave');
+        btnSave.disabled = true;
+
+        let formData = new FormData(this);
+
+        fetch('/member/api/join/enter-price/save', {
+            method: 'POST',
+            body  : formData
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result.code !== 201) {
+                   alert(result.message)
+                    btnSave.disabled = false;
+                } else {
+                    alert('저장되었습니다.');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }
+</script>
+
+</body>
+</html>
